@@ -4,3 +4,26 @@ html, * {
 	padding: 0;
 	box-sizing: border-box;
 }
+
+body {
+    margin: 20px;
+    background-color: lightsteelblue;
+}
+
+.header,
+.top-info {
+    display: flex;
+}
+
+.game-card {
+    /* visibility: hidden; */
+    background-color: tomato;
+    color: seashell;
+}
+
+.answer-choices {
+    margin-left: 40px;
+}
+.answer-choices > li {
+    border: 2px solid seashell;
+}

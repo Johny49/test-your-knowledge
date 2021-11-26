@@ -12,7 +12,37 @@
 <body>
     <header>
         <h1>Test Your Knowledge!</h1>
+        <button id="open-high-scores-btn">View High Scores</button>
+        <button id="restart-btn">Restart</button>
     </header>
+    <div class="top-info">
+        <section class="score-info">
+            <h3>Score:</h3>
+            <h2 id="num-correct">3</h2>
+            <h2>/</h2>
+            <h2 id="questions-asked">7</h2>
+        </section>
+        <section class="timer">
+            <h3>Time Remaining:</h3>
+            <h2 id="seconds-remaining">120</h2>
+        </section>
+    </div>
+    <section class="pregame">
+        <h2 class="quiz-title">JS Code Quiz</h2>
+        <p class="instructions">You have 120 seconds to answer as many questions as possible.  Each incorrect answer costs you 10 seconds.  Press Play to begin.</p>
+        <button id="start-btn">PLAY</button>
+    </section>
+    <section class="game-card">
+        <h4 class="question">Question content goes here?</h4>
+        <!-- answer choices for question added here -->
+        <ol class="answer-choices">
+            <li id="choice-a">asdfdsfa</li> <!-- test data-->
+            <li id="choice-b">safdwer</li> <!-- test data-->
+            <li id="choice-c">asdfdsfa</li> <!-- test data-->
+            <li id="choice-d">safdwer</li> <!-- test data-->
+        </ol>
+        <span class="answer-validate">CORRECT!</span>
+    </section>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
