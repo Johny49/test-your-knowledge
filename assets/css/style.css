@@ -16,7 +16,7 @@ body {
 }
 
 .game-card {
-    /* visibility: hidden; */
+    display: none;
     background-color: tomato;
     color: seashell;
 }

@@ -24,12 +24,16 @@
         </section>
         <section class="timer">
             <h3>Time Remaining:</h3>
-            <h2 id="seconds-remaining">120</h2>
+            <h2 id="seconds-remaining"></h2>
         </section>
     </div>
     <section class="pregame">
         <h2 class="quiz-title">JS Code Quiz</h2>
         <p class="instructions">You have <span id="game-time"></span> seconds to answer as many questions as possible.  Each incorrect answer costs you 10 seconds.  Press Play to begin.</p>
+        <ul class="quiz-options"> Choose a  Quiz
+            <li>Quiz 1</li> <!-- sample data -->
+            <li>Quiz 2</li> <!-- sample data -->
+        </ul>
         <button id="start-btn">PLAY</button>
     </section>
     <section class="game-card">
@@ -42,6 +46,11 @@
             <li id="choice-d">safdwer</li> <!-- test data-->
         </ol>
         <span class="answer-validate">CORRECT!</span>
+    </section>
+    <section class="postgame">
+        <h2>Game Over!</h2>
+        <button>Main Menu</button>
+        <button>Play Again</button>
     </section>
     <script src="./assets/js/script.js"></script>
 </body>
