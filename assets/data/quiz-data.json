@@ -1,0 +1,216 @@
+{
+    "JavaScript Quiz": {
+        "content": {
+            "q1": {
+                "question": "Ask a question here?",
+                "choices": [
+                    "first choice",
+                    "second choice",
+                    "third choice",
+                    "fourth choice"
+                ],
+                "answer": "c"
+            },
+            "q2": {
+                "question": "Ask a question here?",
+                "choices": [
+                    "first choice",
+                    "second choice",
+                    "third choice",
+                    "fourth choice"
+                ],
+                "answer": "c"
+            },
+            "q3": {
+                "question": "Ask a question here?",
+                "choices": [
+                "first choice",
+                "second choice",
+                "third choice",
+                "fourth choice"
+                ],
+                "answer": "d"
+            },
+            "q4": {
+                "question": "Ask a question here?",
+                "choices": [
+                    "first choice",
+                    "second choice",
+                    "third choice",
+                    "fourth choice"
+                ],
+                "answer": "a"
+            },
+            "q5": {
+                "question": "Ask a question here?",
+                "choices": [
+                    "first choice",
+                    "second choice",
+                    "third choice",
+                    "fourth choice"
+                ],
+                "answer": "a"
+            },
+            "q6": {
+                "question": "Ask a question here?",
+                "choices": [
+                "first choice",
+                "second choice",
+                "third choice",
+                "fourth choice"
+                ],
+                "answer": "d"
+            },
+            "q7": {
+                "question": "Ask a question here?",
+                "choices": [
+                    "first choice",
+                    "second choice",
+                    "third choice",
+                    "fourth choice"
+                ],
+                "answer": "b"
+            },
+            "q8": {
+                "question": "Ask a question here?",
+                "choices": [
+                    "first choice",
+                    "second choice",
+                    "third choice",
+                    "fourth choice"
+                ],
+                "answer": "b"
+            },
+            "q9": {
+                "question": "Ask a question here?",
+                "choices": [
+                "first choice",
+                "second choice",
+                "third choice",
+                "fourth choice"
+                ],
+                "answer": "d"
+            },
+            "q10": {
+                "question": "Ask a question here?",
+                "choices": [
+                "first choice",
+                "second choice",
+                "third choice",
+                "fourth choice"
+                ],
+                "answer": "a"
+            }
+        },
+        
+
+
+    },
+
+    "Cat Quiz": {
+        "content": {
+            "q1": {
+                "question": "Ask a question here?",
+                "choices": [
+                    "first choice",
+                    "second choice",
+                    "third choice",
+                    "fourth choice"
+                ],
+                "answer": "c"
+            },
+            "q2": {
+                "question": "Ask a question here?",
+                "choices": [
+                    "first choice",
+                    "second choice",
+                    "third choice",
+                    "fourth choice"
+                ],
+                "answer": "c"
+            },
+            "q3": {
+                "question": "Ask a question here?",
+                "choices": [
+                "first choice",
+                "second choice",
+                "third choice",
+                "fourth choice"
+                ],
+                "answer": "d"
+            },
+            "q4": {
+                "question": "Ask a question here?",
+                "choices": [
+                    "first choice",
+                    "second choice",
+                    "third choice",
+                    "fourth choice"
+                ],
+                "answer": "a"
+            },
+            "q5": {
+                "question": "Ask a question here?",
+                "choices": [
+                    "first choice",
+                    "second choice",
+                    "third choice",
+                    "fourth choice"
+                ],
+                "answer": "a"
+            },
+            "q6": {
+                "question": "Ask a question here?",
+                "choices": [
+                "first choice",
+                "second choice",
+                "third choice",
+                "fourth choice"
+                ],
+                "answer": "d"
+            },
+            "q7": {
+                "question": "Ask a question here?",
+                "choices": [
+                    "first choice",
+                    "second choice",
+                    "third choice",
+                    "fourth choice"
+                ],
+                "answer": "b"
+            },
+            "q8": {
+                "question": "Ask a question here?",
+                "choices": [
+                    "first choice",
+                    "second choice",
+                    "third choice",
+                    "fourth choice"
+                ],
+                "answer": "b"
+            },
+            "q9": {
+                "question": "Ask a question here?",
+                "choices": [
+                "first choice",
+                "second choice",
+                "third choice",
+                "fourth choice"
+                ],
+                "answer": "d"
+            },
+            "q10": {
+                "question": "Ask a question here?",
+                "choices": [
+                "first choice",
+                "second choice",
+                "third choice",
+                "fourth choice"
+                ],
+                "answer": "a"
+            }
+        }
+
+
+    }
+}
