@@ -1,5 +1,4 @@
-// {
-[
+{
     "JavaScript Quiz": {
         "q1": {
             "question": "Ask a question here?",
@@ -204,5 +203,4 @@
             "answer": "a"
         }
     }
-]
-// }
+}

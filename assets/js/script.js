@@ -1,10 +1,13 @@
 // score vars
 var numCorrectEl = document.getElementById("num-correct");
-var questionsAskedEl = document.getElementById("questions-asked");
+var numAskedEl = document.getElementById("questions-asked");
 // timer-related vars
+var timerEl = document.querySelector(".timer");
 var secondsRemainingEl = document.getElementById("seconds-remaining");
 var gameTimeEl = document.getElementById("game-time");
 var gameTime = 120; //set time for game in seconds
+// restart btn element to end current game
+var restartBtnEl = document.getElementById("restart-btn");
 // pregame elements
 var preGameEl = document.querySelector(".pregame");
 var startBtn = document.getElementById("start-btn");
@@ -12,8 +15,11 @@ var quizOptions = document.querySelector(".quiz-options");
 // game-card elements
 var gameCardEl = document.querySelector(".game-card");
 var answerChoicesEl = document.querySelector(".answer-choices");
+var answerValidateEl = document.querySelector(".answer-validate");
 // postgame element
 var postgameEl = document.querySelector(".postgame");
+var postgameMessageEl = document.getElementById("postgame-message");
+var playAgainBtnEl = document.getElementById("play-again-btn"); 
 // quizzes in json
 var quizzes;
 // game state
@@ -23,15 +29,19 @@ var numAsked = 0;
 
 
 // initial ui set up and presentation of pregame to user with quiz options from quiz-data.json
-function init() {
+function gameInit() {
     // retrieve quiz names from JSON and set to li
     // getQuizData(loadQuestionData);
 
-
+    // ensure timer and game info is reset and game state set to false
+    gameTime = 120;
+    playingGame = false;
     secondsRemainingEl.textContent = gameTime;
     gameTimeEl.textContent = gameTime;
-
-
+    numCorrect = 0;
+    numCorrectEl.textContent = numCorrect;
+    numAsked = 0;
+    numAskedEl.textContent = numAsked;
 }
 
 // set game state, hide pregame and display game-card, start timer
@@ -39,9 +49,12 @@ function startGame() {
     playingGame = true;
 
     preGameEl.style.display = "none";
+    restartBtnEl.style.display = "inline-block";
+    timerEl.style.display = "inline-block";
     gameCardEl.style.display = "block";
 
-    // start game timer
+    // display and start game timer
+    timerEl.style.display = "inline-block";
     fireGameTimer(gameTime);
     loadQuestionData();
 }
@@ -92,12 +105,18 @@ async function getQuizData() {
 function loadQuestionData() {
     var questionEl = document.querySelector(".question");
 
-    // GET QUESTION DATA AND DISPLAY TO USER   
+    // GET QUESTION DATA AND DISPLAY TO USER 
     // quizzes = JSON.parse(quizJson);
     // console.log(quizzes);
+    quiz = quizJson["JavaScript Quiz"];
+    qNum = ("q" + numAsked);
+    // console.log(quiz.qNum[0]);
+    var xyz = quiz.q0.choices[3];
+    console.log(xyz);
 
-    var question = "What is the question that goes here?";
-    var choices = ["first choice", "second choice", "third choice", "fourth choice"];
+    var question = quiz.q0.question;
+    var choices = quiz.q0.choices;
+    // ["first choice", "second choice", "third choice", "fourth choice"];
 
     //show question
     questionEl.textContent = question;
@@ -109,45 +128,60 @@ function loadQuestionData() {
     };
 
 function checkAnswer(userAnswer) {
-    console.log(userAnswer);
+    console.log("ua =" + userAnswer);
     var answer = 1;
     // CHECK USER INPUT AGAINST SAVED ANSWER FOR QUESTION
-    if (userAnswer === answer) {
+    if (userAnswer == answer) {
         // Display CORRECT MESSAGE AND UPDATE 
-        console.log("CORRECT");
+        answerValidateEl.textContent = "CORRECT";
         numCorrect++;
+        numCorrectEl.textContent = numCorrect;
     } else {
         // Display WRONG MESSAGE
-        console.log("WRONG");
+        answerValidateEl.textContent = "WRONG";
         // check time remaining; if at least 10 seconds, subtract from timer; otherwise end game.
         if (gameTime > 10) {
             gameTime -= 10; // subtract 10 seconds from clock
+            gameTimeEl = gameTime; // update display with new time
         } else {
-            clearInterval(timeInterval);
+            gameTime = 0;
             gameOver();
         }
     }
         // update questions asked
         numAsked++;
+        numAskedEl.textContent =numAsked;
+        // load next question if numasked <=9; otherwise end game
+        (numAsked <= 9) ? loadQuestionData() : gameOver();
 }
 
+// display score, reset to initial and show postgame when game ends
 function gameOver() {
-    //DO STUFF HERE WHEN THE GAME IS DONE
-    playingGame = false;
+    postgameMessageEl.textContent = "You answered " + numCorrect + " out of " + numAsked + "!"
+
+    //TODO add check for high score and update as needed
+
+    gameInit();
+    timerEl.style.display = "none";
     gameCardEl.style.display = "none";
     postgameEl.style.display = "block";
     console.log("GAME OVER MAN");
 }
 
-
-init();
+//Set up quiz for initial play
+gameInit();
 
 // EVENT LISTENERS
 // game start btn clicked
 startBtn.addEventListener("click", startGame);
+// end current game and reset
+restartBtnEl.addEventListener("click", gameOver);
 // listener for answer choices clicked
-answerChoicesEl.addEventListener("click", checkAnswer(this.id));
-
+answerChoicesEl.addEventListener("click", function(e) {
+    checkAnswer(e.target.id);
+});
+// play again 
+playAgainBtnEl.addEventListener("click", startGame);
 
 // // RETRIEVE QUIZZES FROM JSON
 // async function getQuizData() {
@@ -164,9 +198,19 @@ answerChoicesEl.addEventListener("click", checkAnswer(this.id));
 
 var quizJson = {
     "JavaScript Quiz": {
-        "q1": {
+        "q0": {
             "question": "Ask a question here?",
             "choices": [
+                "first choice",
+                "second choice",
+                "third choice",
+                "fourth choice"
+            ],
+            "answer": "a"
+        },
+        "q1": {
+            "question": "Ask a question here?",
+            "choices": [ 
                 "first choice",
                 "second choice",
                 "third choice",
@@ -253,19 +297,19 @@ var quizJson = {
                 "fourth choice"
             ],
             "answer": "d"
-        },
-        "q10": {
-            "question": "Ask a question here?",
-            "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
-            ],
-            "answer": "a"
         }
     },
     "Cat Quiz": {
+        "q0": {
+            "question": "Ask a question here?",
+            "choices": [
+                "first choice",
+                "second choice",
+                "third choice",
+                "fourth choice"
+            ],
+            "answer": "a"
+        },
         "q1": {
             "question": "Ask a question here?",
             "choices": [
@@ -355,16 +399,6 @@ var quizJson = {
                 "fourth choice"
             ],
             "answer": "d"
-        },
-        "q10": {
-            "question": "Ask a question here?",
-            "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
-            ],
-            "answer": "a"
         }
     }
 };

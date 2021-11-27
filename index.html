@@ -12,8 +12,8 @@
 <body>
     <header>
         <h1>Test Your Knowledge!</h1>
-        <button id="open-high-scores-btn">View High Scores</button>
-        <button id="restart-btn">Restart</button>
+        <a href="./high_scores.html" id="open-high-scores">View High Scores</a>
+        <button id="restart-btn">End Game</button>
     </header>
     <div class="top-info">
         <section class="score-info">
@@ -48,13 +48,13 @@
             <li id="2"></li>
             <li id="3"></li>
         </ol>
-        <span class="answer-validate">CORRECT!</span>
+        <span class="answer-validate"></span>
     </section>
     <!-- Postgame - shows when gameplay completes -->
     <section class="postgame">
         <h2>Game Over!</h2>
-        <button>Main Menu</button>
-        <button>Play Again</button>
+        <p id="postgame-message"></p>
+        <button id="play-again-btn">Play Again</button>
     </section>
     <script src="./assets/js/script.js"></script>
 </body>

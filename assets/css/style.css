@@ -15,8 +15,15 @@ body {
     display: flex;
 }
 
-.game-card {
+/* hide sections when quiz is not active */
+#restart-btn,
+.timer, 
+.game-card, 
+.postgame {
     display: none;
+}
+
+.game-card {
     background-color: tomato;
     color: seashell;
 }
@@ -28,6 +35,3 @@ body {
     border: 2px solid seashell;
 }
 
-.postgame {
-    display: none;
-}
