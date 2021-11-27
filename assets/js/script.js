@@ -1,8 +1,9 @@
+// top info section (score and timer)
+var topInfoEl = document.querySelector(".top-info");
 // score vars
 var numCorrectEl = document.getElementById("num-correct");
 var numAskedEl = document.getElementById("questions-asked");
 // timer-related vars
-var timerEl = document.querySelector(".timer");
 var secondsRemainingEl = document.getElementById("seconds-remaining");
 var gameTimeEl = document.getElementById("game-time");
 var gameTime = 120; //set time for game in seconds
@@ -50,11 +51,11 @@ function startGame() {
 
     preGameEl.style.display = "none";
     restartBtnEl.style.display = "inline-block";
-    timerEl.style.display = "inline-block";
+    topInfoEl.style.display = "inline-block";
     gameCardEl.style.display = "block";
 
     // display and start game timer
-    timerEl.style.display = "inline-block";
+    topInfoEl.style.display = "inline-block";
     fireGameTimer(gameTime);
     loadQuestionData();
 }
@@ -162,7 +163,8 @@ function gameOver() {
     //TODO add check for high score and update as needed
 
     gameInit();
-    timerEl.style.display = "none";
+    restartBtnEl.style.display = "none";
+    topInfoEl.style.display = "none";
     gameCardEl.style.display = "none";
     postgameEl.style.display = "block";
     console.log("GAME OVER MAN");

@@ -8,6 +8,9 @@ html, * {
 body {
     margin: 20px;
     background-color: lightsteelblue;
+    font-family: 'Josefin Sans', sans-serif;
+    line-height: 1.5em;
+    color: darkblue;
 }
 
 .header,
@@ -17,7 +20,7 @@ body {
 
 /* hide sections when quiz is not active */
 #restart-btn,
-.timer, 
+.top-info, 
 .game-card, 
 .postgame {
     display: none;
