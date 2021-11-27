@@ -27,6 +27,7 @@
             <h2 id="seconds-remaining"></h2>
         </section>
     </div>
+    <!-- Pregame - displays on load, hides when game starts -->
     <section class="pregame">
         <h2 class="quiz-title">JS Code Quiz</h2>
         <p class="instructions">You have <span id="game-time"></span> seconds to answer as many questions as possible.  Each incorrect answer costs you 10 seconds.  Press Play to begin.</p>
@@ -36,17 +37,20 @@
         </ul>
         <button id="start-btn">PLAY</button>
     </section>
+    <!-- Game Card - displays only while game is being played -->
     <section class="game-card">
-        <h4 class="question">Question content goes here?</h4>
+        <!-- question added here -->
+        <h4 class="question"></h4>
         <!-- answer choices for question added here -->
-        <ol class="answer-choices">
-            <li id="choice-a">asdfdsfa</li> <!-- test data-->
-            <li id="choice-b">safdwer</li> <!-- test data-->
-            <li id="choice-c">asdfdsfa</li> <!-- test data-->
-            <li id="choice-d">safdwer</li> <!-- test data-->
+        <ol class="answer-choices" type="a">
+            <li id="0"></li>
+            <li id="1"></li>
+            <li id="2"></li>
+            <li id="3"></li>
         </ol>
         <span class="answer-validate">CORRECT!</span>
     </section>
+    <!-- Postgame - shows when gameplay completes -->
     <section class="postgame">
         <h2>Game Over!</h2>
         <button>Main Menu</button>

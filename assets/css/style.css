@@ -27,3 +27,7 @@ body {
 .answer-choices > li {
     border: 2px solid seashell;
 }
+
+.postgame {
+    display: none;
+}
