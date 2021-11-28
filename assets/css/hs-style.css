@@ -1,0 +1,58 @@
+/* css reset */
+html, * {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+    background-color: darkblue;
+    color: lightsteelblue;
+    font-family: 'Josefin Sans', sans-serif;
+    min-width: 90vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+
+header {
+    background-color: dodgerblue;
+    color: darkblue;
+    min-width: 100vw;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.score-list {
+    display: flex;
+    justify-content: center;
+    min-width: 60vw;
+    padding: 20px;
+}
+
+ol {
+    min-width: 50vw;
+    line-height: 2em;
+}
+
+button {
+    font-size: 2em;
+    padding: 4px;
+    background-color: dodgerblue;
+    border-radius: 4px;
+}
+
+button a {
+    text-decoration: none;
+    color: darkblue;
+}
+
+button:hover {
+    border-color: transparent;
+    box-shadow: 0 0 0 3px gold;
+}

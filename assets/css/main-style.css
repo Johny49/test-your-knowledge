@@ -38,6 +38,24 @@ body {
     display: none;
 }
 
+button {
+    color: darkblue;
+    font-size: 2em;
+    padding: 4px;
+    background-color: dodgerblue;
+    border-radius: 4px;
+}
+
+button a {
+    text-decoration: none;
+    color: darkblue;
+}
+
+button:hover {
+    border-color: transparent;
+    box-shadow: 0 0 0 3px gold;
+}
+
 .game-card {
     min-width: 85vw;
     flex-wrap: wrap;
@@ -57,10 +75,17 @@ body {
 }
 .answer-choices > li {
     border: 2px solid seashell;
+    border-radius: 4px;
+    margin: 8px 0;
+}
+
+.answer-choices > li:hover {
+    border-color: transparent;
+    box-shadow: 0 0 0 4px gold;
 }
 
 .answer-choices :nth-child(2n) {
-    background-color: darkcyan;
+    background-color: #055c5c;
 }
 
 .answer-choices :nth-child(2n+1) {
@@ -68,15 +93,12 @@ body {
 }
 
 .result {
-    display: inline-flexbox;
-    align-items: center;
-    justify-content: center;
+    display: flex;
     margin-top: 24px;
 }
 
 .answer-validate {
-    width: 94%;
-    padding: 8px;
+    padding: 12px;
     border-radius: 4px;
 
 }

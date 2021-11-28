@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- TODO add icon for favicon -->
-    <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
+    <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/main-style.css">
     <!-- Googe Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +16,9 @@
     <header>
         <h1>Test Your Knowledge!</h1>
         <div class="header-btns">
-            <a href="./high_scores.html" id="open-high-scores">View High Scores</a>
+            <button>
+                <a href="./high_scores.html" id="high-scores">View High Scores</a>
+            </button>
             <button id="restart-btn">End Game</button>
         </div>
     </header>
@@ -36,7 +37,10 @@
     <!-- Pregame - displays on load, hides when game starts -->
     <section class="pregame">
         <h2 class="quiz-title">JS Code Quiz</h2>
-        <p class="instructions">You have <span id="game-time"></span> seconds to answer as many questions as possible.  Each incorrect answer costs you 10 seconds.  Press Play to begin.</p>
+        <p class="instructions">You have 
+            <!-- added span for game time to allow for future adjustment -->
+            <span id="game-time"></span>
+             seconds to answer as many questions as possible.  Each incorrect answer costs you 10 seconds.  Press Play to begin.</p>
         <ul class="quiz-options"> Choose a  Quiz
             <li>Quiz 1</li> <!-- sample data -->
             <li>Quiz 2</li> <!-- sample data -->
@@ -65,6 +69,6 @@
         <!-- ADD CHANGE QUIZ BUTTON if multiple quizzes included -->
         <button id="play-again-btn">Play Again</button>
     </section>
-    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/main-script.js"></script>
 </body>
 </html>

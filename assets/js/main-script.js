@@ -38,6 +38,9 @@ function gameInit() {
     gameTime = 120;
     playingGame = false;
     secondsRemainingEl.textContent = gameTime;
+    secondsRemainingEl.style.color = "darkblue";
+    secondsRemainingEl.style.fontSize = "1.5em";
+
     gameTimeEl.textContent = gameTime;
     numCorrect = 0;
     numCorrectEl.textContent = numCorrect;
