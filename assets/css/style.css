@@ -6,16 +6,28 @@ html, * {
 }
 
 body {
-    margin: 20px;
+    margin: 40px;
     background-color: lightsteelblue;
     font-family: 'Josefin Sans', sans-serif;
     line-height: 1.5em;
     color: darkblue;
 }
 
-.header,
+.header-btns,
 .top-info {
+    min-width: 90vw;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.score-info,
+.timer {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 12px 0;
 }
 
 /* hide sections when quiz is not active */
@@ -27,14 +39,44 @@ body {
 }
 
 .game-card {
-    background-color: tomato;
+    min-width: 85vw;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    background-color: darkblue;
+    padding: 16px;
+    border-radius: 4px;
     color: seashell;
+    font-size: 1.5em;
+    line-height: 1.5em;
 }
 
 .answer-choices {
-    margin-left: 40px;
+    width: 94%;
+    list-style-position: inside;
 }
 .answer-choices > li {
     border: 2px solid seashell;
 }
 
+.answer-choices :nth-child(2n) {
+    background-color: darkcyan;
+}
+
+.answer-choices :nth-child(2n+1) {
+    background-color: rgb(23, 109, 110);
+}
+
+.result {
+    display: inline-flexbox;
+    align-items: center;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+.answer-validate {
+    width: 94%;
+    padding: 8px;
+    border-radius: 4px;
+
+}

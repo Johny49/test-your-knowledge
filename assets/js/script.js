@@ -50,12 +50,13 @@ function startGame() {
     playingGame = true;
 
     preGameEl.style.display = "none";
+    postgameEl.style.display = "none";
     restartBtnEl.style.display = "inline-block";
     topInfoEl.style.display = "inline-block";
-    gameCardEl.style.display = "block";
+    gameCardEl.style.display = "flex";
 
     // display and start game timer
-    topInfoEl.style.display = "inline-block";
+    topInfoEl.style.display = "flex";
     fireGameTimer(gameTime);
     loadQuestionData();
 }
@@ -133,13 +134,15 @@ function checkAnswer(userAnswer) {
     var answer = 1;
     // CHECK USER INPUT AGAINST SAVED ANSWER FOR QUESTION
     if (userAnswer == answer) {
-        // Display CORRECT MESSAGE AND UPDATE 
+        // create and style CORRECT MESSAGE and update display 
         answerValidateEl.textContent = "CORRECT";
+        answerValidateEl.style.background = "green";
         numCorrect++;
         numCorrectEl.textContent = numCorrect;
     } else {
-        // Display WRONG MESSAGE
+        // create and style WRONG MESSAGE and update display 
         answerValidateEl.textContent = "WRONG";
+        answerValidateEl.style.background = "red";
         // check time remaining; if at least 10 seconds, subtract from timer; otherwise end game.
         if (gameTime > 10) {
             gameTime -= 10; // subtract 10 seconds from clock
@@ -152,8 +155,8 @@ function checkAnswer(userAnswer) {
         // update questions asked
         numAsked++;
         numAskedEl.textContent =numAsked;
-        // load next question if numasked <=9; otherwise end game
-        (numAsked <= 9) ? loadQuestionData() : gameOver();
+        // load next question if numasked <=9; otherwise end game after 2 sec. delay (to allow user to see result of final question)
+        (numAsked <= 9) ? loadQuestionData() : setTimeout(gameOver, 2000);
 }
 
 // display score, reset to initial and show postgame when game ends

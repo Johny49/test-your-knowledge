@@ -16,8 +16,10 @@
 <body>
     <header>
         <h1>Test Your Knowledge!</h1>
-        <a href="./high_scores.html" id="open-high-scores">View High Scores</a>
-        <button id="restart-btn">End Game</button>
+        <div class="header-btns">
+            <a href="./high_scores.html" id="open-high-scores">View High Scores</a>
+            <button id="restart-btn">End Game</button>
+        </div>
     </header>
     <div class="top-info">
         <section class="score-info">
@@ -52,7 +54,9 @@
             <li id="2"></li>
             <li id="3"></li>
         </ol>
-        <span class="answer-validate"></span>
+        <section class="result">
+            <span class="answer-validate"></span>
+        </section>
     </section>
     <!-- Postgame - shows when gameplay completes -->
     <section class="postgame">
