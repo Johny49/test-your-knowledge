@@ -15,12 +15,6 @@
 <body>
     <header>
         <h1>Test Your Knowledge!</h1>
-        <div class="header-btns">
-            <button>
-                <a href="./high_scores.html" id="high-scores">View High Scores</a>
-            </button>
-            <button id="restart-btn">End Game</button>
-        </div>
     </header>
     <div class="top-info">
         <section class="score-info">
@@ -66,9 +60,19 @@
     <section class="postgame">
         <h2>Game Over!</h2>
         <p id="postgame-message"></p>
-        <!-- ADD CHANGE QUIZ BUTTON if multiple quizzes included -->
+        <form action="save-high-score">
+            <label id="initials-lbl" for="initials">Initials:</label>
+            <input id="initials-input" type="text" maxlength="3">
+            <input type="submit" value="Submit" id="submit-high-score-btn">
+        </form>
         <button id="play-again-btn">Play Again</button>
     </section>
+    <div class="control-btns">
+        <button>
+            <a href="./high_scores.html" id="high-scores">View High Scores</a>
+        </button>
+        <button id="restart-btn">End Game</button>
+    </div>
     <script src="./assets/js/main-script.js"></script>
 </body>
 </html>

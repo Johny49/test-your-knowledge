@@ -31,12 +31,12 @@ header {
 .score-list {
     display: flex;
     justify-content: center;
-    min-width: 60vw;
+    min-width: 50vw;
     padding: 20px;
 }
 
 ol {
-    min-width: 50vw;
+    min-width: 30vw;
     line-height: 2em;
 }
 

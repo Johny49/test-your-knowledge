@@ -21,7 +21,11 @@ var answerValidateEl = document.querySelector(".answer-validate");
 var postgameEl = document.querySelector(".postgame");
 var postgameMessageEl = document.getElementById("postgame-message");
 var playAgainBtnEl = document.getElementById("play-again-btn"); 
-// quizzes in json
+// high score form elements
+var initalsLblEl = document.getElementById("initials-lbl");
+var initialsInputEl = document.getElementById("initials-input");
+var submitHighScoreBtn = document.getElementById("submit-high-score-btn");
+// quiz data
 var quizzes;
 // game state
 var playingGame = false;
@@ -113,11 +117,11 @@ function loadQuestionData() {
     // GET QUESTION DATA AND DISPLAY TO USER 
     // quizzes = JSON.parse(quizJson);
     // console.log(quizzes);
-    quiz = quizJson["JavaScript Quiz"];
-    qNum = ("q" + numAsked);
+    // quiz = quizJson["JavaScript Quiz"];
+    // qNum = ("q" + numAsked);
     // console.log(quiz.qNum[0]);
-    var xyz = quiz.q0.choices[3];
-    console.log(xyz);
+    // var xyz = quiz.q0.choices[3];
+    // console.log(xyz);
 
     var question = quiz.q0.question;
     var choices = quiz.q0.choices;
@@ -168,12 +172,44 @@ function gameOver() {
 
     //TODO add check for high score and update as needed
 
-    gameInit();
+    // gameInit();
     restartBtnEl.style.display = "none";
     topInfoEl.style.display = "none";
     gameCardEl.style.display = "none";
     postgameEl.style.display = "block";
     console.log("GAME OVER MAN");
+}
+
+function checkIfHighScore(newScore) {
+    // var savedScores = localStorage.getItem("savedScores");
+    var savedScores = [["abc", 10], ["abc", 9],["ske", 8], ["skw", 8], ["wle", 7], ["wle", 7], ["wle", 7], ["wle", 6], ["wle", 6], ["wle", 5]];
+    if ((!savedScores) || (savedScores.length < 10)) {
+        // if no saved scores or if < 10 saved scores
+        return true;
+    } else {
+        // check if newScore is higher than lowest saved
+        var scoreArray = [];
+        for (score in savedScores) {
+            scoreArray.push(savedScores[score][1]);
+        }
+        if (scoreArray.sort((a, b) => a - b)[0] < newScore) {
+            return true;
+        } else {
+            return false;
+        };
+    } 
+}
+
+// save user initials and score to local storage
+function submitHighScore(event) {
+    event.preventDefault();
+    // retrieve saved scores, if any 
+    var savedScores = localStorage.getItem("saved-scores");
+    
+    if (!savedScores || savedScores.length < 10) {
+        var saveData = [initialsInputEl.value, numCorrect];
+        localStorage.setItem("saved-scores", saveData);
+    }
 }
 
 //Set up quiz for initial play
@@ -188,6 +224,8 @@ restartBtnEl.addEventListener("click", gameOver);
 answerChoicesEl.addEventListener("click", function(e) {
     checkAnswer(e.target.id);
 });
+// submit high score
+submitHighScoreBtn.addEventListener("click", submitHighScore);
 // play again 
 playAgainBtnEl.addEventListener("click", startGame);
 
@@ -204,9 +242,9 @@ playAgainBtnEl.addEventListener("click", startGame);
 
 // }
 
-var quizJson = {
-    "JavaScript Quiz": {
-        "q0": {
+//     "JavaScript Quiz":
+    var quizdata = [
+    {
             "question": "Ask a question here?",
             "choices": [
                 "first choice",
@@ -216,7 +254,7 @@ var quizJson = {
             ],
             "answer": "a"
         },
-        "q1": {
+    {
             "question": "Ask a question here?",
             "choices": [ 
                 "first choice",
@@ -226,7 +264,7 @@ var quizJson = {
             ],
             "answer": "c"
         },
-        "q2": {
+        {
             "question": "Ask a question here?",
             "choices": [
                 "first choice",
@@ -236,7 +274,7 @@ var quizJson = {
             ],
             "answer": "c"
         },
-        "q3": {
+        {
             "question": "Ask a question here?",
             "choices": [
                 "first choice",
@@ -246,7 +284,7 @@ var quizJson = {
             ],
             "answer": "d"
         },
-        "q4": {
+        {
             "question": "Ask a question here?",
             "choices": [
                 "first choice",
@@ -256,7 +294,7 @@ var quizJson = {
             ],
             "answer": "a"
         },
-        "q5": {
+        {
             "question": "Ask a question here?",
             "choices": [
                 "first choice",
@@ -266,7 +304,7 @@ var quizJson = {
             ],
             "answer": "a"
         },
-        "q6": {
+        {
             "question": "Ask a question here?",
             "choices": [
                 "first choice",
@@ -276,7 +314,7 @@ var quizJson = {
             ],
             "answer": "d"
         },
-        "q7": {
+        {
             "question": "Ask a question here?",
             "choices": [
                 "first choice",
@@ -286,7 +324,7 @@ var quizJson = {
             ],
             "answer": "b"
         },
-        "q8": {
+        {
             "question": "Ask a question here?",
             "choices": [
                 "first choice",
@@ -296,7 +334,7 @@ var quizJson = {
             ],
             "answer": "b"
         },
-        "q9": {
+        {
             "question": "Ask a question here?",
             "choices": [
                 "first choice",
@@ -306,107 +344,4 @@ var quizJson = {
             ],
             "answer": "d"
         }
-    },
-    "Cat Quiz": {
-        "q0": {
-            "question": "Ask a question here?",
-            "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
-            ],
-            "answer": "a"
-        },
-        "q1": {
-            "question": "Ask a question here?",
-            "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
-            ],
-            "answer": "c"
-        },
-        "q2": {
-            "question": "Ask a question here?",
-            "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
-            ],
-            "answer": "c"
-        },
-        "q3": {
-            "question": "Ask a question here?",
-            "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
-            ],
-            "answer": "d"
-        },
-        "q4": {
-            "question": "Ask a question here?",
-            "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
-            ],
-            "answer": "a"
-        },
-        "q5": {
-            "question": "Ask a question here?",
-            "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
-            ],
-            "answer": "a"
-        },
-        "q6": {
-            "question": "Ask a question here?",
-            "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
-            ],
-            "answer": "d"
-        },
-        "q7": {
-            "question": "Ask a question here?",
-            "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
-            ],
-            "answer": "b"
-        },
-        "q8": {
-            "question": "Ask a question here?",
-            "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
-            ],
-            "answer": "b"
-        },
-        "q9": {
-            "question": "Ask a question here?",
-            "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
-            ],
-            "answer": "d"
-        }
-    }
-};
+    ];
