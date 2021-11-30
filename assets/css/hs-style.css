@@ -30,14 +30,12 @@ header {
 
 .score-list {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     min-width: 50vw;
-    padding: 20px;
-}
-
-ol {
-    min-width: 30vw;
     line-height: 2em;
+    padding: 20px;
 }
 
 button {
