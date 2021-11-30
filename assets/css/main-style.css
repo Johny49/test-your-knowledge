@@ -39,7 +39,7 @@ main {
 .pregame,
 .game-card,
 .postgame  {
-    min-width: 85vw;
+    width: 85vw;
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;

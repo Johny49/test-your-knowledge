@@ -241,102 +241,102 @@ gameInit();
 //     "JavaScript Quiz":
     var quizdata = [
     {
-            "question": "Ask a question1 here?",
+            "question": "Inside which HTML element do we put the JavaScript?",
             "choices": [
-                "first choice1",
-                "second choice1",
-                "third choice1",
-                "fourth choice1"
+                "<script>",
+                "<javascript>",
+                "<js>",
+                "<header>"
             ],
             "answer": "0"
         },
     {
-            "question": "Ask a question2 here?",
+            "question": "Which shows the correct way to write a JavaScript array?",
             "choices": [ 
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
+                "var fruits = (1:\”kiwi\”, 2:\”pear\”, 3:\”apple\”);",
+                "var fruits = \“kiwi\”, \“pear\”, \“apple\”;",
+                "var fruits = [\“kiwi\”, \“pear\”, \“apple\”];",
+                "var fruits = 1 = (\“kiwi\”), 2 = (\“pear\”), 3 = (\“apple\”);"
             ],
             "answer": "2"
         },
         {
-            "question": "Ask a question3 here?",
+            "question": "Which event occurs when the user clicks on an HTML element?",
             "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
+                "onmouseover",
+                "onmouseclick",
+                "onclick",
+                "onbutton"
             ],
             "answer": "2"
         },
         {
-            "question": "Ask a question4 here?",
+            "question": "8. Which of the following is not a reserved word in JavaScript?",
             "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
+                "throws",
+                "short",
+                "interface",
+                "program"
             ],
             "answer": "3"
         },
         {
-            "question": "Ask a question5 here?",
+            "question": "What is the correct syntax for referring to an external script called main.js”",
             "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
+                "<script src=\”main.js\”",
+                "<script href=\”main.js\”>",
+                "<script name=\”main.js\”>",
+                "<script ref=\"main.js\”>"
             ],
             "answer": "0"
         },
         {
-            "question": "Ask a question6 here?",
+            "question": "Which built-in method returns the character at the specified index?",
             "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
+                "charAt",
+                "characterAt",
+                "getCharAt",
+                "showChar"
             ],
             "answer": "0"
         },
         {
-            "question": "Ask a question7 here?",
+            "question": "How can you get the type of arguments passed to a function?",
             "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
+                "using the toString method",
+                "using the getType method",
+                "using the charCodeAt method",
+                "using the typeof operator"
             ],
             "answer": "3"
         },
         {
-            "question": "Ask a question8 here?",
+            "question": "Which function can be used to add a new item to the end of an array?",
             "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
+                "pull()",
+                "push()",
+                "pop()",
+                "shift()"
             ],
             "answer": "1"
         },
         {
-            "question": "Ask a question9 here?",
+            "question": "Which type of variable is only visible within the function where it is defined?",
             "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
+                "global",
+                "local",
+                "both are correct",
+                "neither are correct"
             ],
             "answer": "1"
         },
         {
-            "question": "Ask a question10 here?",
+            "question": "What is the correct syntax to display \"Hello\" in an alert box using JavaScript?",
             "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
+                "msgbox(\"Hello\");",
+                "alertbox(\"Hello\");",
+                "msg(\"Hello\");",
+                "alert(\"Hello\");"
             ],
             "answer": "3"
         }
