@@ -18,7 +18,7 @@ Test Your Knowledge
 
 
 ## Link
-[Password Generator Website](https://johny49.github.io/test-your-knowledge/)
+[Test Your Knowledge Website](https://johny49.github.io/test-your-knowledge/)
 
 
 ## Code

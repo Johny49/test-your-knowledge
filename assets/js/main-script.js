@@ -22,11 +22,12 @@ var postgameEl = document.querySelector(".postgame");
 var postgameMessageEl = document.getElementById("postgame-message");
 var playAgainBtnEl = document.getElementById("play-again-btn"); 
 // high score form elements
-var initalsLblEl = document.getElementById("initials-lbl");
 var initialsInputEl = document.getElementById("initials-input");
 var submitHighScoreBtn = document.getElementById("submit-high-score-btn");
 // game state
 var playingGame = false;
+
+// track questions correct and attempted
 var numCorrect = 0;
 var numAsked = 0;
 
@@ -69,7 +70,6 @@ function gameInit() {
     manageState("PREGAME");
     // ensure timer and game info is reset and game state set to false
     gameTime = 120;
-    playingGame = false;
     secondsRemainingEl.textContent = gameTime;
     // reset style on seconds element so it isn't red
     secondsRemainingEl.style.color = "darkblue";
@@ -147,8 +147,8 @@ function checkAnswer(userAnswer) {
         // update questions asked
         numAsked++;
         numAskedEl.textContent =numAsked;
-        // load next question if numasked <=9; otherwise end game after 2 sec. delay (to allow user to see result of final question)
-        (numAsked <= 9) ? loadQuestionData() : setTimeout(gameOver, 2000);
+        // load next question if numasked <=9; otherwise end game after 1.5 sec. delay (to allow user to see result of final question)
+        (numAsked <= 9) ? loadQuestionData() : setTimeout(gameOver, 1500);
 }
 
 function showResult(result) {
@@ -166,55 +166,21 @@ if (result) {
 // display score, reset to initial and show postgame when game ends
 function gameOver() {
     manageState("POSTGAME");
-    postgameMessageEl.textContent = "You answered " + numCorrect + " out of " + numAsked + "!"
-    console.log("GAME OVER MAN");
-
-    //check if user has high score and update stored scores as needed
-    if (checkIfHighScore(numCorrect)) {
-        submitHighScore();
-    };
+    postgameMessageEl.textContent = "You answered " + numCorrect + " out of " + numAsked + "!";
 }
 
-function checkIfHighScore(newScore) {
-    var savedScores = JSON.parse(localStorage.savedScores);
-    // var savedScores = [["abc", 10], ["abc", 9],["ske", 8], ["skw", 8], ["wle", 7], ["wle", 7], ["wle", 7], ["wle", 6], ["wle", 6], ["wle", 5]];
-    if ((!savedScores) || (savedScores.length < 10)) {
-        // if no saved scores or if < 10 saved scores
-        return true;
-    } else {
-        // check if newScore is higher than lowest saved
-        var scoreArray = [];
-        for (score in savedScores) {
-            scoreArray.push(savedScores[score][1]);
-        }
-        if (scoreArray.sort((a, b) => a - b)[0] < newScore) {
-            return true;
-        } else {
-            return false;
-        };
-    } 
-}
-
-// save user initials and score to local storage
 function submitHighScore(event) {
     event.preventDefault();
-    if (localStorage.getItem("savedScores") != nil) {
-            // retrieve saved scores, if any 
-        var savedScores = JSON.parse(localStorage.getItem("savedScores"));
-        if (savedScores.length < 10) {
-            // less than 10 saved scores; add to saved
-            var saveData = [initialsInputEl.value, numCorrect];
-            savedScores.push(saveData);
-            localStorage.setItem("savedScores") = JSON.stringify(savedScores);
-        } else {
-                //TODO remove lowest score before saving new score
-    }
-    } else {
-    // no scores saved; create and save array
-        var saveData = [initialsInputEl.value, numCorrect];
-        var savedScores = [saveData];
-        localStorage.setItem("savedScores") = JSON.stringify(savedScores);
-    }
+
+    var savedScores = JSON.parse(localStorage.getItem("savedScores")) || [];
+    var newScore = {
+      initials: initialsInputEl.value,
+      score: numCorrect
+    };
+    savedScores.push(newScore);
+    // store object in storage and JSON.stringify to convert it as a string
+    localStorage.setItem("savedScores", JSON.stringify(savedScores));
+
     alert("Your score has been saved");
 }
 
