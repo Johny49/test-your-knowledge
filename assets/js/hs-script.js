@@ -6,7 +6,13 @@ function loadSavedScores() {
  if (savedScores) {
     for (score in savedScores) {
         var output = savedScores[score];
+        console.log(output);
         scoreListEl.children[score].textContent = output;
     }
  }
 };
+
+// function to return to main page when Go Back to Game button pressed
+function goBack() {
+    window.history.back();
+}

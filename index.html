@@ -13,6 +13,7 @@
     <title>Test Your Knowledge!</title>
 </head>
 <body>
+    <main>
     <header>
         <h1>Test Your Knowledge!</h1>
     </header>
@@ -31,14 +32,8 @@
     <!-- Pregame - displays on load, hides when game starts -->
     <section class="pregame">
         <h2 class="quiz-title">JS Code Quiz</h2>
-        <p class="instructions">You have 
-            <!-- added span for game time to allow for future adjustment -->
-            <span id="game-time"></span>
-             seconds to answer as many questions as possible.  Each incorrect answer costs you 10 seconds.  Press Play to begin.</p>
-        <ul class="quiz-options"> Choose a  Quiz
-            <li>Quiz 1</li> <!-- sample data -->
-            <li>Quiz 2</li> <!-- sample data -->
-        </ul>
+        <p class="instructions">You have 120
+             seconds to answer as many questions as possible.  Each incorrect answer subtracts 10 seconds.  Press Play to begin.</p>
         <button id="start-btn">PLAY</button>
     </section>
     <!-- Game Card - displays only while game is being played -->
@@ -67,12 +62,13 @@
         </form>
         <button id="play-again-btn">Play Again</button>
     </section>
-    <div class="control-btns">
+    <section class="control-btns">
         <button>
-            <a href="./high_scores.html" id="high-scores">View High Scores</a>
+            <a href="./high_scores.html" id="high-scores-btn">View High Scores</a>
         </button>
         <button id="restart-btn">End Game</button>
-    </div>
+    </section>
+</main>
     <script src="./assets/js/main-script.js"></script>
 </body>
 </html>

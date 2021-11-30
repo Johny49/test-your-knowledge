@@ -13,8 +13,14 @@ body {
     color: darkblue;
 }
 
-.top-info,
-.control-btns {
+main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center; 
+    justify-content: center;
+}
+
+.top-info {
     min-width: 90vw;
     display: flex;
     flex-wrap: wrap;
@@ -30,37 +36,9 @@ body {
     margin: 12px 0;
 }
 
-.pregame {
-    width: 65vw;
-}
-
-/* hide sections when quiz is not active */
-#restart-btn,
-.top-info, 
-.game-card, 
-.postgame {
-    display: none;
-}
-
-button {
-    color: darkblue;
-    font-size: 2em;
-    padding: 4px;
-    background-color: dodgerblue;
-    border-radius: 4px;
-}
-
-button a {
-    text-decoration: none;
-    color: darkblue;
-}
-
-button:hover {
-    border-color: transparent;
-    box-shadow: 0 0 0 3px gold;
-}
-
-.game-card {
+.pregame,
+.game-card,
+.postgame  {
     min-width: 85vw;
     flex-wrap: wrap;
     flex-direction: column;
@@ -71,6 +49,7 @@ button:hover {
     color: seashell;
     font-size: 1.5em;
     line-height: 1.5em;
+    margin-top: 20px;
 }
 
 .answer-choices {
@@ -104,5 +83,33 @@ button:hover {
 .answer-validate {
     padding: 12px;
     border-radius: 4px;
+}
 
+button {
+    color: darkblue;
+    font-size: 2em;
+    padding: 4px;
+    background-color: dodgerblue;
+    border-radius: 4px;
+}
+
+button a {
+    text-decoration: none;
+    color: darkblue;
+}
+
+button:hover {
+    border-color: transparent;
+    box-shadow: 0 0 0 3px gold;
+}
+
+#play-again-btn {
+    margin-top: 24px;
+}
+
+.control-btns {
+    min-width: 90vw;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
 }

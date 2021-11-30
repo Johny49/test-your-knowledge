@@ -5,7 +5,6 @@ var numCorrectEl = document.getElementById("num-correct");
 var numAskedEl = document.getElementById("questions-asked");
 // timer-related vars
 var secondsRemainingEl = document.getElementById("seconds-remaining");
-var gameTimeEl = document.getElementById("game-time");
 var gameTime = 120; //set time for game in seconds
 // restart btn element to end current game
 var restartBtnEl = document.getElementById("restart-btn");
@@ -15,6 +14,7 @@ var startBtn = document.getElementById("start-btn");
 var quizOptions = document.querySelector(".quiz-options");
 // game-card elements
 var gameCardEl = document.querySelector(".game-card");
+var questionEl = document.querySelector(".question");
 var answerChoicesEl = document.querySelector(".answer-choices");
 var answerValidateEl = document.querySelector(".answer-validate");
 // postgame element
@@ -25,27 +25,56 @@ var playAgainBtnEl = document.getElementById("play-again-btn");
 var initalsLblEl = document.getElementById("initials-lbl");
 var initialsInputEl = document.getElementById("initials-input");
 var submitHighScoreBtn = document.getElementById("submit-high-score-btn");
-// quiz data
-var quizzes;
 // game state
 var playingGame = false;
 var numCorrect = 0;
 var numAsked = 0;
 
+// control whether we are at START, PLAYING, OR SCORE SCREEN
+function manageState(state) {
+    switch (state) {
+        case "PREGAME": {
+            preGameEl.style.display = "flex";
+            topInfoEl.style.display = "none";
+            gameCardEl.style.display = "none";
+            restartBtnEl.style.display = "none";
+            postgameEl.style.display = "none";
+            break;
+        }
+        case "PLAYING": {
+            preGameEl.style.display = "none";
+            topInfoEl.style.display = "flex";
+            gameCardEl.style.display = "flex";
+            restartBtnEl.style.display = "inline-block";
+            postgameEl.style.display = "none";
+            break;
+        }
+        case "POSTGAME": {
+            preGameEl.style.display = "none";
+            topInfoEl.style.display = "none";
+            gameCardEl.style.display = "none";
+            restartBtnEl.style.display = "none";
+            postgameEl.style.display = "flex";
+            break;
+        }
+        default: {
+            console.log("Something went wrong. Current state is " + state);
+        }
+    }
+
+}
 
 // initial ui set up and presentation of pregame to user with quiz options from quiz-data.json
 function gameInit() {
-    // retrieve quiz names from JSON and set to li
-    // getQuizData(loadQuestionData);
-
+    manageState("PREGAME");
     // ensure timer and game info is reset and game state set to false
     gameTime = 120;
     playingGame = false;
     secondsRemainingEl.textContent = gameTime;
+    // reset style on seconds element so it isn't red
     secondsRemainingEl.style.color = "darkblue";
     secondsRemainingEl.style.fontSize = "1.5em";
 
-    gameTimeEl.textContent = gameTime;
     numCorrect = 0;
     numCorrectEl.textContent = numCorrect;
     numAsked = 0;
@@ -54,23 +83,14 @@ function gameInit() {
 
 // set game state, hide pregame and display game-card, start timer
 function startGame() {
-    playingGame = true;
-
-    preGameEl.style.display = "none";
-    postgameEl.style.display = "none";
-    restartBtnEl.style.display = "inline-block";
-    topInfoEl.style.display = "inline-block";
-    gameCardEl.style.display = "flex";
-
+    manageState("PLAYING");
     // display and start game timer
-    topInfoEl.style.display = "flex";
     fireGameTimer(gameTime);
     loadQuestionData();
 }
 
 // start countdown timer and refresh display every 1000ms
 function fireGameTimer() {
-
     var timeInterval = setInterval(function () {
         secondsRemainingEl.textContent = gameTime;
 
@@ -91,46 +111,13 @@ function fireGameTimer() {
     }, 1000);    
 }
 
-// RETRIEVE QUIZZES FROM JSON
-async function getQuizData() {
-    const response = fetch("/assets/data/quiz-data.json")
-    .then(response => response.json()) 
-    .then(jsonObject => console.log(jsonObject));
-
-    console.log(response.json());
-    // {
-    //     if (response.ok) {
-    //         quizzes= response.json();
-    //         // return response.json();
-    //     }
-    //     return Promise.reject(response);
-    // }).catch(function (error) {
-    //     console.warn(error);
-    //     alert("Unable to load quizzes.");
-    // });
-
-}
-
 function loadQuestionData() {
-    var questionEl = document.querySelector(".question");
-
-    // GET QUESTION DATA AND DISPLAY TO USER 
-    // quizzes = JSON.parse(quizJson);
-    // console.log(quizzes);
-    // quiz = quizJson["JavaScript Quiz"];
-    // qNum = ("q" + numAsked);
-    // console.log(quiz.qNum[0]);
-    // var xyz = quiz.q0.choices[3];
-    // console.log(xyz);
-
-    var question = quiz.q0.question;
-    var choices = quiz.q0.choices;
-    // ["first choice", "second choice", "third choice", "fourth choice"];
-
-    //show question
+    //show next question based on number of questions already asked (numAsked var)
+    var question = quizdata[numAsked].question;
     questionEl.textContent = question;
 
-    // iterate choices and show on screen
+    // show corresponding choices in answer-choices ol
+    var choices = quizdata[numAsked].choices;
     for (choice in choices) {
         answerChoicesEl.children[choice].textContent = choices[choice];
         }
@@ -138,22 +125,20 @@ function loadQuestionData() {
 
 function checkAnswer(userAnswer) {
     console.log("ua =" + userAnswer);
-    var answer = 1;
-    // CHECK USER INPUT AGAINST SAVED ANSWER FOR QUESTION
+    // get saved answer for current question
+    var answer = quizdata[numAsked].answer;
+
+    // Check User Input Against Saved Answer For Question
     if (userAnswer == answer) {
-        // create and style CORRECT MESSAGE and update display 
-        answerValidateEl.textContent = "CORRECT";
-        answerValidateEl.style.background = "green";
+        showResult(true);
+        //increase score and update element
         numCorrect++;
         numCorrectEl.textContent = numCorrect;
     } else {
-        // create and style WRONG MESSAGE and update display 
-        answerValidateEl.textContent = "WRONG";
-        answerValidateEl.style.background = "red";
+        showResult(false);
         // check time remaining; if at least 10 seconds, subtract from timer; otherwise end game.
         if (gameTime > 10) {
             gameTime -= 10; // subtract 10 seconds from clock
-            gameTimeEl = gameTime; // update display with new time
         } else {
             gameTime = 0;
             gameOver();
@@ -166,23 +151,33 @@ function checkAnswer(userAnswer) {
         (numAsked <= 9) ? loadQuestionData() : setTimeout(gameOver, 2000);
 }
 
+function showResult(result) {
+if (result) {
+    // create and style CORRECT MESSAGE and update display 
+    answerValidateEl.textContent = "CORRECT";
+    answerValidateEl.style.background = "green";
+    } else {
+        // create and style WRONG MESSAGE and update display 
+        answerValidateEl.textContent = "WRONG";
+        answerValidateEl.style.background = "red";
+    }
+}
+
 // display score, reset to initial and show postgame when game ends
 function gameOver() {
+    manageState("POSTGAME");
     postgameMessageEl.textContent = "You answered " + numCorrect + " out of " + numAsked + "!"
-
-    //TODO add check for high score and update as needed
-
-    // gameInit();
-    restartBtnEl.style.display = "none";
-    topInfoEl.style.display = "none";
-    gameCardEl.style.display = "none";
-    postgameEl.style.display = "block";
     console.log("GAME OVER MAN");
+
+    //check if user has high score and update stored scores as needed
+    if (checkIfHighScore(numCorrect)) {
+        submitHighScore();
+    };
 }
 
 function checkIfHighScore(newScore) {
-    // var savedScores = localStorage.getItem("savedScores");
-    var savedScores = [["abc", 10], ["abc", 9],["ske", 8], ["skw", 8], ["wle", 7], ["wle", 7], ["wle", 7], ["wle", 6], ["wle", 6], ["wle", 5]];
+    var savedScores = JSON.parse(localStorage.savedScores);
+    // var savedScores = [["abc", 10], ["abc", 9],["ske", 8], ["skw", 8], ["wle", 7], ["wle", 7], ["wle", 7], ["wle", 6], ["wle", 6], ["wle", 5]];
     if ((!savedScores) || (savedScores.length < 10)) {
         // if no saved scores or if < 10 saved scores
         return true;
@@ -203,17 +198,25 @@ function checkIfHighScore(newScore) {
 // save user initials and score to local storage
 function submitHighScore(event) {
     event.preventDefault();
-    // retrieve saved scores, if any 
-    var savedScores = localStorage.getItem("saved-scores");
-    
-    if (!savedScores || savedScores.length < 10) {
-        var saveData = [initialsInputEl.value, numCorrect];
-        localStorage.setItem("saved-scores", saveData);
+    if (localStorage.getItem("savedScores") != nil) {
+            // retrieve saved scores, if any 
+        var savedScores = JSON.parse(localStorage.getItem("savedScores"));
+        if (savedScores.length < 10) {
+            // less than 10 saved scores; add to saved
+            var saveData = [initialsInputEl.value, numCorrect];
+            savedScores.push(saveData);
+            localStorage.setItem("savedScores") = JSON.stringify(savedScores);
+        } else {
+                //TODO remove lowest score before saving new score
     }
+    } else {
+    // no scores saved; create and save array
+        var saveData = [initialsInputEl.value, numCorrect];
+        var savedScores = [saveData];
+        localStorage.setItem("savedScores") = JSON.stringify(savedScores);
+    }
+    alert("Your score has been saved");
 }
-
-//Set up quiz for initial play
-gameInit();
 
 // EVENT LISTENERS
 // game start btn clicked
@@ -227,121 +230,114 @@ answerChoicesEl.addEventListener("click", function(e) {
 // submit high score
 submitHighScoreBtn.addEventListener("click", submitHighScore);
 // play again 
-playAgainBtnEl.addEventListener("click", startGame);
+playAgainBtnEl.addEventListener("click", gameInit);
 
-// // RETRIEVE QUIZZES FROM JSON
-// async function getQuizData() {
-//     const response = await fetch("/assets/data/quiz-data.json");
-//     quizzes= await response.json();
-//     // console.log(response.status)
-//     if (response.status == 200) {
-//         getQuizData()
-//     } else {
-//         alert("Unable to load quizzes.");
-//     }
 
-// }
+//Set up quiz for initial play
+gameInit();
 
+
+// #################################################### //
 //     "JavaScript Quiz":
     var quizdata = [
     {
-            "question": "Ask a question here?",
+            "question": "Ask a question1 here?",
             "choices": [
-                "first choice",
-                "second choice",
-                "third choice",
-                "fourth choice"
+                "first choice1",
+                "second choice1",
+                "third choice1",
+                "fourth choice1"
             ],
-            "answer": "a"
+            "answer": "0"
         },
     {
-            "question": "Ask a question here?",
+            "question": "Ask a question2 here?",
             "choices": [ 
                 "first choice",
                 "second choice",
                 "third choice",
                 "fourth choice"
             ],
-            "answer": "c"
+            "answer": "2"
         },
         {
-            "question": "Ask a question here?",
+            "question": "Ask a question3 here?",
             "choices": [
                 "first choice",
                 "second choice",
                 "third choice",
                 "fourth choice"
             ],
-            "answer": "c"
+            "answer": "2"
         },
         {
-            "question": "Ask a question here?",
+            "question": "Ask a question4 here?",
             "choices": [
                 "first choice",
                 "second choice",
                 "third choice",
                 "fourth choice"
             ],
-            "answer": "d"
+            "answer": "3"
         },
         {
-            "question": "Ask a question here?",
+            "question": "Ask a question5 here?",
             "choices": [
                 "first choice",
                 "second choice",
                 "third choice",
                 "fourth choice"
             ],
-            "answer": "a"
+            "answer": "0"
         },
         {
-            "question": "Ask a question here?",
+            "question": "Ask a question6 here?",
             "choices": [
                 "first choice",
                 "second choice",
                 "third choice",
                 "fourth choice"
             ],
-            "answer": "a"
+            "answer": "0"
         },
         {
-            "question": "Ask a question here?",
+            "question": "Ask a question7 here?",
             "choices": [
                 "first choice",
                 "second choice",
                 "third choice",
                 "fourth choice"
             ],
-            "answer": "d"
+            "answer": "3"
         },
         {
-            "question": "Ask a question here?",
+            "question": "Ask a question8 here?",
             "choices": [
                 "first choice",
                 "second choice",
                 "third choice",
                 "fourth choice"
             ],
-            "answer": "b"
+            "answer": "1"
         },
         {
-            "question": "Ask a question here?",
+            "question": "Ask a question9 here?",
             "choices": [
                 "first choice",
                 "second choice",
                 "third choice",
                 "fourth choice"
             ],
-            "answer": "b"
+            "answer": "1"
         },
         {
-            "question": "Ask a question here?",
+            "question": "Ask a question10 here?",
             "choices": [
                 "first choice",
                 "second choice",
                 "third choice",
                 "fourth choice"
             ],
-            "answer": "d"
+            "answer": "3"
         }
     ];
