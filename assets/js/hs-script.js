@@ -7,18 +7,6 @@ function loadSavedScores() {
     // sort scores
         console.log(savedScores.sort(sortScores));
 
-
-        // for (score in savedScores) {
-        //     var output = savedScores[score]["initials"] + " - " + savedScores[score]["score"];
-
-        //     scoreArray.push(savedScores[score][1]);
-        // }
-        // if (scoreArray.sort((a, b) => a - b)[0] < newScore) {
-        //     return true;
-        // } else {
-        //     return false;
-        // };
-
     // add elements and display scores
     for (score in savedScores) {
         var output = savedScores[score]["initials"] + " - " + savedScores[score]["score"];
